@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">StateQuiz</string>
+    <string name="state_quiz">State Quiz</string>
+    <string name="state_quiz_detail">This app is designed for quizzing the user on
+    their knowledge about state capitals in the United States of America. One may also
+    look at previous quiz scores.</string>
+    <string name="begin">Begin</string>
 </resources>
