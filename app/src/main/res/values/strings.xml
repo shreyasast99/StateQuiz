@@ -5,4 +5,11 @@
     their knowledge about state capitals in the United States of America. One may also
     look at previous quiz scores.</string>
     <string name="begin">Begin</string>
+    <string name="homeDetail">Would you like to view past quiz scores or try to take the quiz?</string>
+    <string name="start_new_quiz">Start New Quiz</string>
+    <string name="view_past_results">View Past Results</string>
+    <string name="past_quiz_scores">Past Quiz Scores</string>
+    <string name="resultsTitle">This is your score for this quiz!</string>
+    <string name="resultsButton">Look at past quiz scores</string>
+    <string name="quizResults">TextView</string>
 </resources>
