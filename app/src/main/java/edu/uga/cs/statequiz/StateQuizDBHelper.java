@@ -5,6 +5,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import com.opencsv.CSVReader;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 /**
@@ -20,7 +29,7 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
 
     private static final String DEBUG_TAG = "StateQuizDBHelper";
 
-    private static final String DB_NAME = "statequiz.db";
+    private static final String DB_NAME = "statequizquestions.db";
     private static final int DB_VERSION = 1;
 
     // Define all names (strings) for table and column names.
@@ -75,7 +84,51 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate( SQLiteDatabase db ) {
         db.execSQL( CREATE_STATEQUIZ );
+
         Log.d( DEBUG_TAG, "Table " + TABLE_STATEQUIZ + " created" );
+        try {
+            // Open the CSV data file in the assets folder
+            InputStream in_s = getAssets().open( "data.csv" );
+
+            // get the TableLayout view
+            TableLayout tableLayout = findViewById(R.id.table_main);
+
+            // set up margins for each TextView in the table layout
+            android.widget.TableRow.LayoutParams layoutParams =
+                    new TableRow.LayoutParams( TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT );
+            layoutParams.setMargins(20, 0, 20, 0);
+
+            // read the CSV data
+            CSVReader reader = new CSVReader( new InputStreamReader( in_s ) );
+            String[] nextLine;
+            while( ( nextLine = reader.readNext() ) != null ) {
+
+                // nextLine[] is an array of values from the line
+
+                // create the next table row for the layout
+                TableRow tableRow = new TableRow( getBaseContext() );
+                for( int i = 0; i < nextLine.length; i++ ) {
+
+                    // create a new TextView and set its text
+                    TextView textView = new TextView( getBaseContext() );
+                    // for all columns exept the SCHOOL, align right
+                    if( i != 1 )
+                        textView.setGravity(Gravity.RIGHT);
+                    textView.setText( nextLine[i] );
+
+                    // add the new TextView to the table row in the table supplying the
+                    // layout parameters
+                    tableRow.addView( textView, layoutParams );
+                }
+
+                // add the next row to the table layout
+                tableLayout.addView( tableRow );
+            }
+        } catch (Exception e) {
+            Log.e( TAG, e.toString() );
+        }
+        //end of csv transfer
     }
 
     // We should override onUpgrade method, which will be used to upgrade the database if

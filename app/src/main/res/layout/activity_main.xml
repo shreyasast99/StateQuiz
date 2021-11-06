@@ -27,9 +27,15 @@
         android:textSize="17sp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/newQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/begin" />
+        android:text="Start New Quiz" />
+
+    <Button
+        android:id="@+id/pastResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Past Results" />
 
 </LinearLayout>
