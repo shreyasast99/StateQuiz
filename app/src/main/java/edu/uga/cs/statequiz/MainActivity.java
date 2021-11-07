@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         buttonNewQuiz = findViewById(R.id.newQuiz);
         buttonNewQuiz.setOnClickListener(new ButtonClickListener());
     }
-    private class ButtonClickListener implements
+    static class ButtonClickListener implements
             View.OnClickListener {
         Intent intent;
         /**
@@ -35,5 +35,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public class QuizButtonClickListener implements View.OnClickListener {
     }
 }
