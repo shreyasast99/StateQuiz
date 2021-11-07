@@ -42,7 +42,7 @@ public class State {
         this.id = id;
     }
 
-    public String getstate()
+    public String getState()
     {
         return state;
     }
@@ -70,6 +70,16 @@ public class State {
     public void setThirdCity(String thirdCity)
     {
         this.thirdCity=thirdCity;
+    }
+
+    public String getCapital()
+    {
+        return capital;
+    }
+
+    public void setCapital(String capital)
+    {
+        this.capital=capital;
     }
 
 
