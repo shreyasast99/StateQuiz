@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +28,7 @@ public class PastQuizScores extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // Create a JobLeadsData instance, since we will need to save a new JobLead to the dn.
-        // Note that even though more activites may create their own instances of the JobLeadsData
+        // Note that even though more activities may create their own instances of the JobLeadsData
         // class, we will be using a single instance of the JobLeadsDBHelper object, since
         // that class is a singleton class.
         // jobLeadsData = new JobLeadsData( this );
@@ -92,13 +91,4 @@ public class PastQuizScores extends AppCompatActivity {
         }
     }
 
-    // this is our own callback for a DialogFragment which adds a new job lead.
-    public void onFinishNewJobLeadDialog(State state) {
-        // add the new job lead
-        new JobLeadDBWriter().execute( state );
-    }
-
-    void showDialogFragment( DialogFragment newFragment ) {
-        newFragment.show( getSupportFragmentManager(), null);
-    }
 }

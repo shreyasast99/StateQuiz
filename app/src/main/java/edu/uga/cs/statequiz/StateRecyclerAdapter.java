@@ -25,18 +25,18 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
     // The adapter must have a ViewHolder class to "hold" one item to show.
     class JobLeadHolder extends RecyclerView.ViewHolder {
 
-        TextView state;
-        TextView capital;
-        TextView secondcity;
-        TextView thirdcity;
+        TextView date;
+        TextView score;
+        //TextView secondcity;
+        //TextView thirdcity;
 
         public JobLeadHolder(View itemView ) {
             super(itemView);
 
-            state = (TextView) itemView.findViewById( R.id.state );
-            capital = (TextView) itemView.findViewById( R.id.captial );
-            secondcity = (TextView) itemView.findViewById( R.id.secondcity );
-            thirdcity = (TextView) itemView.findViewById( R.id.thirdcity );
+            date = (TextView) itemView.findViewById( R.id.date );
+            score = (TextView) itemView.findViewById( R.id.score );
+            //secondcity = (TextView) itemView.findViewById( R.id.secondcity );
+            //thirdcity = (TextView) itemView.findViewById( R.id.thirdcity );
         }
     }
 
@@ -46,7 +46,7 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
         // This is a bit tricky, and we must provide the parent reference (the second param of inflate)
         // and false as the third parameter (don't attach to root).
         // Consequently, the parent view's (the RecyclerView) width will be used (match_parent).
-        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.job_lead, parent, false );
+        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.card_result, parent, false );
         return new JobLeadHolder( view );
     }
 
@@ -58,10 +58,8 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
 
         Log.d( DEBUG_TAG, "onBindViewHolder: " + state );
 
-        holder.state.setText( state.getState());
-        holder.capital.setText( state.getCapital() );
-        holder.secondcity.setText( state.getSecondCity() );
-        holder.thirdcity.setText( state.getThirdCity() );
+        holder.date.setText( state.getState());
+        holder.score.setText( state.getCapital() );
     }
 
     @Override
