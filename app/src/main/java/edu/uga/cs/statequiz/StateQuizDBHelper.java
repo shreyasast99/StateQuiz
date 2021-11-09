@@ -5,17 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-
-import com.opencsv.CSVReader;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 
 /**
@@ -42,9 +31,9 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     public static final String STATEQUIZ_COLUMN_CAPITAL = "capital";
     public static final String STATEQUIZ_COLUMN_SECONDCITY = "secondcity";
     public static final String STATEQUIZ_COLUMN_THIRDCITY = "thirdcity";
-    public static final String STATEQUIZ_COLUMN_STATEHOOD = "statehood";
-    public static final String STATEQUIZ_COLUMN_CAPITALSINCE = "capitalsince";
-    public static final String STATEQUIZ_COLUMN_SIZERANK = "sizerank";
+    //public static final String STATEQUIZ_COLUMN_STATEHOOD = "statehood";
+    //public static final String STATEQUIZ_COLUMN_CAPITALSINCE = "capitalsince";
+    //public static final String STATEQUIZ_COLUMN_SIZERANK = "sizerank";
 
     // This is a reference to the only instance for the helper.
     private static StateQuizDBHelper helperInstance;
@@ -58,10 +47,10 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
                     + STATEQUIZ_COLUMN_STATE + " TEXT, "
                     + STATEQUIZ_COLUMN_CAPITAL + " TEXT, "
                     + STATEQUIZ_COLUMN_SECONDCITY + " TEXT, "
-                    + STATEQUIZ_COLUMN_THIRDCITY + " TEXT,"
-                    + STATEQUIZ_COLUMN_STATEHOOD+ " TEXT, "
-                    + STATEQUIZ_COLUMN_CAPITALSINCE+ " TEXT, "
-                    + STATEQUIZ_COLUMN_SIZERANK + " TEXT "
+                    + STATEQUIZ_COLUMN_THIRDCITY + " TEXT"
+                    //+ STATEQUIZ_COLUMN_STATEHOOD+ " TEXT, "
+                    //+ STATEQUIZ_COLUMN_CAPITALSINCE+ " TEXT, "
+                    //+ STATEQUIZ_COLUMN_SIZERANK + " TEXT "
                     + ")";
 
     // Note that the constructor is private!

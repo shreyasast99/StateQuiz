@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PastQuizScores extends AppCompatActivity {
     private RecyclerView recyclerView;
-    //private JobLeadRecyclerAdapter recyclerAdapter;
+    private StateRecyclerAdapter recyclerAdapter;
 
     private StateData statesData = null;
     private List<State> stateList;
@@ -61,7 +61,7 @@ public class PastQuizScores extends AppCompatActivity {
         // onPostExecute is like the notify method in an asynchronous method call discussed in class.
         @Override
         protected void onPostExecute( List<State> jobLeadsList ) {
-            recyclerAdapter = new JobLeadRecyclerAdapter( jobLeadsList );
+            recyclerAdapter = new StateRecyclerAdapter( jobLeadsList );
             recyclerView.setAdapter( recyclerAdapter );
         }
     }

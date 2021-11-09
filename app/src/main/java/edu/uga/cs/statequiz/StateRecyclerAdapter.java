@@ -25,18 +25,18 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
     // The adapter must have a ViewHolder class to "hold" one item to show.
     class JobLeadHolder extends RecyclerView.ViewHolder {
 
-        TextView companyName;
-        TextView phone;
-        TextView url;
-        TextView comments;
+        TextView state;
+        TextView capital;
+        TextView secondcity;
+        TextView thirdcity;
 
         public JobLeadHolder(View itemView ) {
             super(itemView);
 
-            companyName = (TextView) itemView.findViewById( R.id.companyName );
-            phone = (TextView) itemView.findViewById( R.id.phone );
-            url = (TextView) itemView.findViewById( R.id.url );
-            comments = (TextView) itemView.findViewById( R.id.comments );
+            state = (TextView) itemView.findViewById( R.id.state );
+            capital = (TextView) itemView.findViewById( R.id.captial );
+            secondcity = (TextView) itemView.findViewById( R.id.secondcity );
+            thirdcity = (TextView) itemView.findViewById( R.id.thirdcity );
         }
     }
 
@@ -54,18 +54,18 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
     // The position parameter indicates the position on the list of jobs list.
     @Override
     public void onBindViewHolder( JobLeadHolder holder, int position ) {
-        JobLead jobLead = jobLeadList.get( position );
+        State state = stateList.get( position );
 
-        Log.d( DEBUG_TAG, "onBindViewHolder: " + jobLead );
+        Log.d( DEBUG_TAG, "onBindViewHolder: " + state );
 
-        holder.companyName.setText( jobLead.getCompanyName());
-        holder.phone.setText( jobLead.getPhone() );
-        holder.url.setText( jobLead.getUrl() );
-        holder.comments.setText( jobLead.getComments() );
+        holder.state.setText( state.getState());
+        holder.capital.setText( state.getCapital() );
+        holder.secondcity.setText( state.getSecondCity() );
+        holder.thirdcity.setText( state.getThirdCity() );
     }
 
     @Override
     public int getItemCount() {
-        return jobLeadList.size();
+        return stateList.size();
     }
 }
