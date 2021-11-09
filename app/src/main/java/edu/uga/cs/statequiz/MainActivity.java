@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     final String TAG = "CSVReading";
     private Button buttonNewQuiz;
     private StateData jobLeadsData = null;
+    private Button buttonPastQuiz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         buttonNewQuiz = findViewById(R.id.newQuiz);
         buttonNewQuiz.setOnClickListener(new ButtonClickListener());
         jobLeadsData = new StateData( this );
+        buttonPastQuiz = findViewById(R.id.pastResults);
 
     }
     private class ButtonClickListener implements View.OnClickListener {
@@ -68,11 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            intent = new
-                    Intent( view.getContext(),
-                    NewQuizActivity.class );
-            startActivity( intent );
-
+            switch (view.getId()) {
+                case R.id.newQuiz:
+                    intent = new Intent(view.getContext(), NewQuizActivity.class);
+                    break;
+                case R.id.pastResults:
+                    intent = new Intent(view.getContext(), PastQuizScores.class);
+                    break;
+            }
+            startActivity(intent);
         }
 
 
