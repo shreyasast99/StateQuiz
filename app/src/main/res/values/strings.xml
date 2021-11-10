@@ -9,7 +9,8 @@
     <string name="start_new_quiz">Start New Quiz</string>
     <string name="view_past_results">View Past Results</string>
     <string name="past_quiz_scores">Past Quiz Scores</string>
-    <string name="resultsTitle">This is your score for this quiz!</string>
+    <string name="resultsTitle">Your score is...</string>
     <string name="resultsButton">Look at past quiz scores</string>
     <string name="quizResults">TextView</string>
+    <string name="home">Home Page</string>
 </resources>

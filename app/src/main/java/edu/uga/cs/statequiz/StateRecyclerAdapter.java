@@ -27,8 +27,8 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
 
         TextView date;
         TextView score;
-        //TextView secondcity;
-        //TextView thirdcity;
+        TextView secondcity;
+        TextView thirdcity;
 
         public JobLeadHolder(View itemView ) {
             super(itemView);

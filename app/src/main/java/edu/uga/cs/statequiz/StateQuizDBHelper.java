@@ -31,9 +31,16 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     public static final String STATEQUIZ_COLUMN_CAPITAL = "capital";
     public static final String STATEQUIZ_COLUMN_SECONDCITY = "secondcity";
     public static final String STATEQUIZ_COLUMN_THIRDCITY = "thirdcity";
-    //public static final String STATEQUIZ_COLUMN_STATEHOOD = "statehood";
-    //public static final String STATEQUIZ_COLUMN_CAPITALSINCE = "capitalsince";
-    //public static final String STATEQUIZ_COLUMN_SIZERANK = "sizerank";
+    // public static final String STATEQUIZ_COLUMN_STATEHOOD = "statehood";
+    // public static final String STATEQUIZ_COLUMN_CAPITALSINCE = "capitalsince";
+    // public static final String STATEQUIZ_COLUMN_SIZERANK = "sizerank";
+
+    // Defining all names (strings) for table and column names for past quiz table.
+    public static final String TABLE_PASTSCORES = "quizResults";
+    public static final String PASTSCORES_COLUMNID = "_id";
+    public static final String PASTSCORES_COLUMN_SCORE = "score";
+    public static final String PASTSCORES_COLUMN_DATE = "date";
+
 
     // This is a reference to the only instance for the helper.
     private static StateQuizDBHelper helperInstance;
@@ -52,6 +59,13 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
                     //+ STATEQUIZ_COLUMN_CAPITALSINCE+ " TEXT, "
                     //+ STATEQUIZ_COLUMN_SIZERANK + " TEXT "
                     + ")";
+
+    // Creating table SQL statement to create a table for past scores.
+    private static final String CREATE_PASTSCORES =
+            " create table " + TABLE_PASTSCORES + " ("
+            + PASTSCORES_COLUMNID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + PASTSCORES_COLUMN_DATE + " TEXT, "
+            + PASTSCORES_COLUMN_SCORE + " TEXT " + ")";
 
     // Note that the constructor is private!
     // So, it can be called only from
@@ -75,8 +89,9 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate( SQLiteDatabase db ) {
         db.execSQL( CREATE_STATEQUIZ );
-
+        db.execSQL( CREATE_PASTSCORES );
         Log.d( DEBUG_TAG, "Table " + TABLE_STATEQUIZ + " created" );
+        Log.d( DEBUG_TAG, "Table " + TABLE_PASTSCORES + " created" );
 
         //end of csv transfer
     }
@@ -87,7 +102,9 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
         db.execSQL( "drop table if exists " + TABLE_STATEQUIZ );
+        db.execSQL( "drop table if exists " + TABLE_PASTSCORES );
         onCreate( db );
         Log.d( DEBUG_TAG, "Table " + TABLE_STATEQUIZ + " upgraded" );
+        Log.d( DEBUG_TAG, "Table " + TABLE_PASTSCORES + " upgraded" );
     }
 }
