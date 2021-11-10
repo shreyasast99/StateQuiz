@@ -31,7 +31,7 @@ public class PastQuizScores extends AppCompatActivity {
         // Note that even though more activities may create their own instances of the JobLeadsData
         // class, we will be using a single instance of the JobLeadsDBHelper object, since
         // that class is a singleton class.
-        // jobLeadsData = new JobLeadsData( this );
+        statesData = new StateData( this );
 
         // Execute the retrieval of the job leads in an asynchronous way,
         // without blocking the main UI thread.
@@ -46,8 +46,8 @@ public class PastQuizScores extends AppCompatActivity {
         // in the onCreate callback (the job leads review activity is started).
         @Override
         protected List<State> doInBackground( Void... params ) {
-            StateData.open();
-            stateList = StateData.retrieveAllJobLeads();
+            statesData.open();
+            stateList = statesData.retrieveAllJobLeads();
 
             Log.d( DEBUG_TAG, "JobLeadDBReaderTask: Job leads retrieved: " + stateList.size() );
 

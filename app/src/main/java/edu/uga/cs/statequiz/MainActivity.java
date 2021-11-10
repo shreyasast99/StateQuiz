@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onClick(View view) {
+            /**
             try {
                 // Open the CSV data file in the assets folder
                 InputStream in_s = getAssets().open("state_capitals.csv" );
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e( TAG, e.toString() );
 
             }
-
+            */
             switch (view.getId()) {
                 case R.id.newQuiz:
                     intent = new Intent(view.getContext(), NewQuizActivity.class);

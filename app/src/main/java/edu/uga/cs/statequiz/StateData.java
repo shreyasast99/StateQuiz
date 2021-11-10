@@ -17,8 +17,8 @@ public class StateData {
     public static final String DEBUG_TAG = "JobLeadsData";
 
     // this is a reference to our database; it is used later to run SQL commands
-    private static SQLiteDatabase db;
-    private static SQLiteOpenHelper stateQuizDbHelper;
+    private SQLiteDatabase   db;
+    private SQLiteOpenHelper stateQuizDbHelper;
     private static final String[] allColumns = {
             StateQuizDBHelper.STATEQUIZ_COLUMN_ID,
             StateQuizDBHelper.STATEQUIZ_COLUMN_STATE,
@@ -35,7 +35,7 @@ public class StateData {
     }
 
     // Open the database
-    public static void open() {
+    public void open() {
         db = stateQuizDbHelper.getWritableDatabase();
         Log.d( DEBUG_TAG, "JobLeadsData: db open" );
     }
@@ -51,7 +51,7 @@ public class StateData {
     // Retrieve all job leads and return them as a List.
     // This is how we restore persistent objects stored as rows in the job leads table in the database.
     // For each retrieved row, we create a new JobLead (Java POJO object) instance and add it to the list.
-    public static List<State> retrieveAllJobLeads() {
+    public List<State> retrieveAllJobLeads() {
         ArrayList<State> stateList = new ArrayList<>();
         Cursor cursor = null;
 
@@ -79,7 +79,7 @@ public class StateData {
                     stateObj.setId( id ); // set the id (the primary key) of this object
                     // add it to the list
                     stateList.add( stateObj );
-                    Log.d( DEBUG_TAG, "Retrieved JobLead: " + stateObj );
+                    //Log.d( DEBUG_TAG, "Retrieved JobLead: " + stateObj );
                 }
             }
             Log.d( DEBUG_TAG, "Number of records from DB: " + cursor.getCount() );
@@ -129,3 +129,4 @@ public class StateData {
 
 
 }
+
