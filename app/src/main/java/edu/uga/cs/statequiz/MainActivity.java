@@ -2,22 +2,13 @@ package edu.uga.cs.statequiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.opencsv.CSVReader;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DEBUG_TAG = "NewJobLeadActivity";
@@ -34,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         buttonNewQuiz.setOnClickListener(new ButtonClickListener());
         jobLeadsData = new StateData( this );
         buttonPastQuiz = findViewById(R.id.pastResults);
+        buttonPastQuiz.setOnClickListener(new ButtonClickListener());
 
     }
     private class ButtonClickListener implements View.OnClickListener {
@@ -78,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.pastResults:
                     intent = new Intent(view.getContext(), PastQuizScores.class);
+                    Log.d( DEBUG_TAG, "HELLLLLO" );
                     break;
             }
             startActivity(intent);

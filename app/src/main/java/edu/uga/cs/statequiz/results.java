@@ -35,6 +35,7 @@ public class results extends AppCompatActivity {
                     break;
                 case R.id.button:
                     intent = new Intent(view.getContext(), MainActivity.class);
+                    break;
             }
             startActivity( intent );
         }

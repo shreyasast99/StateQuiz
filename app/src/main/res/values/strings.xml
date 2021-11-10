@@ -13,4 +13,6 @@
     <string name="resultsButton">Look at past quiz scores</string>
     <string name="quizResults">TextView</string>
     <string name="home">Home Page</string>
+    <string name="question">TextView</string>
+    <string name="radiobutton">RadioButton</string>
 </resources>

@@ -64,31 +64,4 @@ public class PastQuizScores extends AppCompatActivity {
             recyclerView.setAdapter( recyclerAdapter );
         }
     }
-
-    // This is an AsyncTask class (it extends AsyncTask) to perform DB writing of a job lead, asynchronously.
-    public class JobLeadDBWriter extends AsyncTask<State, State> {
-
-        // This method will run as a background process to write into db.
-        // It will be automatically invoked by Android, when we call the execute method
-        // in the onClick listener of the Save button.
-        @Override
-        protected State doInBackground( State... states ) {
-            statesData.storeJobLead( states[0] );
-            return states[0];
-        }
-
-        // This method will be automatically called by Android once the writing to the database
-        // in a background process has finished.  Note that doInBackground returns a JobLead object.
-        // That object will be passed as argument to onPostExecute.
-        // onPostExecute is like the notify method in an asynchronous method call discussed in class.
-        @Override
-        protected void onPostExecute( State state ) {
-            // Update the recycler view to include the new job lead
-            stateList.add( state );
-            recyclerAdapter.notifyItemInserted(stateList.size() - 1);
-
-            Log.d( DEBUG_TAG, "Job lead saved: " + state );
-        }
-    }
-
 }
