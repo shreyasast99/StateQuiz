@@ -4,11 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 import android.util.Log;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,11 +178,9 @@ public class StateData {
 
     // storing quiz results into table
     public Score storeQuiz(Score score){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
         ContentValues values = new ContentValues();
         values.put(StateQuizDBHelper.PASTSCORES_COLUMN_SCORE, score.getScore());
-        values.put(StateQuizDBHelper.PASTSCORES_COLUMN_DATE,formatter.format(date));
+        values.put(StateQuizDBHelper.PASTSCORES_COLUMN_DATE, score.getDate());
 
         long id = db.insert(StateQuizDBHelper.TABLE_PASTSCORES, null, values);
         Log.d( DEBUG_TAG, "this the id bae2: " + id );

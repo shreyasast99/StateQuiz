@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.opencsv.CSVReader;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 
 public class MainActivity extends AppCompatActivity {
     public static final String DEBUG_TAG = "NewJobLeadActivity";
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onClick(View view) {
-            /**
+
             try {
                 // Open the CSV data file in the assets folder
                 InputStream in_s = getAssets().open("state_capitals.csv" );
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e( TAG, e.toString() );
 
             }
-            */
+
             switch (view.getId()) {
                 case R.id.newQuiz:
                     intent = new Intent(view.getContext(), NewQuizActivity.class);

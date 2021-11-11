@@ -16,10 +16,11 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
 
     public static final String DEBUG_TAG = "JobLeadRecyclerAdapter";
 
-    private List<State> stateList;
+    private List<Score> scoreList;
+    private StateData score = null;
 
-    public StateRecyclerAdapter( List<State> jobLeadList ) {
-        this.stateList = stateList;
+    public StateRecyclerAdapter( List<Score> scoreList ) {
+        this.scoreList = scoreList;
     }
 
     // The adapter must have a ViewHolder class to "hold" one item to show.
@@ -35,6 +36,7 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
 
             date = (TextView) itemView.findViewById( R.id.date );
             score = (TextView) itemView.findViewById( R.id.score );
+
             //secondcity = (TextView) itemView.findViewById( R.id.secondcity );
             //thirdcity = (TextView) itemView.findViewById( R.id.thirdcity );
         }
@@ -46,6 +48,8 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
         // This is a bit tricky, and we must provide the parent reference (the second param of inflate)
         // and false as the third parameter (don't attach to root).
         // Consequently, the parent view's (the RecyclerView) width will be used (match_parent).
+
+
         View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.card_result, parent, false );
         return new JobLeadHolder( view );
     }
@@ -54,16 +58,16 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
     // The position parameter indicates the position on the list of jobs list.
     @Override
     public void onBindViewHolder( JobLeadHolder holder, int position ) {
-        State state = stateList.get( position );
+        Score score = scoreList.get( position );
 
-        Log.d( DEBUG_TAG, "onBindViewHolder: " + state );
+        Log.d( DEBUG_TAG, "onBindViewHolder: " + score );
 
-        holder.date.setText( state.getState());
-        holder.score.setText( state.getCapital() );
+        holder.date.setText( score.getDate());
+        holder.score.setText( Integer.toString(score.getScore()) );
     }
 
     @Override
     public int getItemCount() {
-        return stateList.size();
+        return scoreList.size();
     }
 }

@@ -16,7 +16,7 @@ public class PastQuizScores extends AppCompatActivity {
     private StateRecyclerAdapter recyclerAdapter;
 
     private StateData statesData = null;
-    private List<State> stateList;
+    private List<Score> scoreList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +39,19 @@ public class PastQuizScores extends AppCompatActivity {
     }
 
     // This is an AsyncTask class (it extends AsyncTask) to perform DB reading of job leads, asynchronously.
-    private class StateQuizDBHelper extends AsyncTask<Void, List<State>> {
+    private class StateQuizDBHelper extends AsyncTask<Void, List<Score>> {
         // This method will run as a background process to read from db.
         // It returns a list of retrieved JobLead objects.
         // It will be automatically invoked by Android, when we call the execute method
         // in the onCreate callback (the job leads review activity is started).
         @Override
-        protected List<State> doInBackground( Void... params ) {
+        protected List<Score> doInBackground( Void... params ) {
             statesData.open();
-            stateList = statesData.retrieveAllJobLeads();
+            scoreList = statesData.retrieveAllScores();
 
-            Log.d( DEBUG_TAG, "JobLeadDBReaderTask: Job leads retrieved: " + stateList.size() );
+            Log.d( DEBUG_TAG, "JobLeadDBReaderTask: Job leads retrieved: " + scoreList.size() );
 
-            return stateList;
+            return scoreList;
         }
 
         // This method will be automatically called by Android once the db reading
@@ -59,7 +59,7 @@ public class PastQuizScores extends AppCompatActivity {
         // values for the RecyclerView.
         // onPostExecute is like the notify method in an asynchronous method call discussed in class.
         @Override
-        protected void onPostExecute( List<State> jobLeadsList ) {
+        protected void onPostExecute( List<Score> jobLeadsList ) {
             recyclerAdapter = new StateRecyclerAdapter( jobLeadsList );
             recyclerView.setAdapter( recyclerAdapter );
         }

@@ -1,4 +1,5 @@
 package edu.uga.cs.statequiz;
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -47,7 +48,7 @@ public class NewQuizActivity extends AppCompatActivity {
         }
 
         mActionBar = getSupportActionBar();
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), vals.size());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), 5);
         mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(0));
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -62,6 +63,14 @@ public class NewQuizActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(position));
+                //Log.d("this is the position:",Integer.toString(position));
+
+                //if(position==5) {
+
+                //Intent reg = new
+                //      Intent(getApplicationContext(), results.class);
+                //startActivity(reg);
+                //}
 
             }
 
@@ -71,25 +80,16 @@ public class NewQuizActivity extends AppCompatActivity {
         });
     }
     //THIS IS WHERE EVERYTHING IS HAPPENING
-    public void loadView(TextView questions, int question ,RadioGroup radioGroup) {
-        //int random_int = (int)Math.floor(Math.random()*(49-1+1)+1);
-        ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add(questionArr[question].getCapital());
-        arrayList.add(questionArr[question].getSecondCity());
-        arrayList.add(questionArr[question].getThirdCity());
-        Collections.shuffle(arrayList);
-        questions.setText("What is the capital of "+questionArr[question].getState());
-        for (int i = 0; i < radioGroup .getChildCount(); i++) {
-
-            ((RadioButton) radioGroup.getChildAt(i)).setText(arrayList.get(i));
-
-        }
+    public boolean checkAnswers(TextView questions, int question ,RadioGroup radioGroup) {
         if (radioGroup.getCheckedRadioButtonId() == -1)
         {
             // no radio buttons are checked
+            Log.d("no buttons clicked:","idkno buttons are clicked man");
+            return false;
         }
         else
         {
+            Log.d("buttons were clicked:","BRO LOOK");
             int radioButtonID = radioGroup.getCheckedRadioButtonId();
 
             RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonID);
@@ -104,7 +104,27 @@ public class NewQuizActivity extends AppCompatActivity {
             {
                 questionAnswers[question] = 0;//if its wrong then set to 0
             }
+            Intent reg = new
+                    Intent(getApplicationContext(), results.class);
+            startActivity(reg);
+            return true;
         }
+    }
+    public void loadView(TextView questions, int question ,RadioGroup radioGroup) {
+        //int random_int = (int)Math.floor(Math.random()*(49-1+1)+1);
+        checkAnswers(questions,question ,radioGroup);
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add(questionArr[question].getCapital());
+        arrayList.add(questionArr[question].getSecondCity());
+        arrayList.add(questionArr[question].getThirdCity());
+        Collections.shuffle(arrayList);
+        questions.setText("What is the capital of "+questionArr[question].getState());
+        for (int i = 0; i < radioGroup .getChildCount(); i++) {
+
+            ((RadioButton) radioGroup.getChildAt(i)).setText(arrayList.get(i));
+
+        }
+
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -168,6 +188,7 @@ public class NewQuizActivity extends AppCompatActivity {
             mTextView = (TextView) rootView.findViewById(R.id.section_label);
             radioGroup = (RadioGroup) rootView.findViewById(R.id.group);
             actualQuestion = (TextView) rootView.findViewById(R.id.textView);
+
             return rootView;
         }
 
@@ -179,6 +200,35 @@ public class NewQuizActivity extends AppCompatActivity {
                 Log.e("the resid?: ", Integer.toString(resId));
 
                 ((NewQuizActivity) getActivity()).loadView(actualQuestion,resId,radioGroup);
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        if (checkedId!= -1) {
+                            int radioButtonID = radioGroup.getCheckedRadioButtonId();
+
+                            RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonID);
+
+                            String selectedText = (String) radioButton.getText();
+
+                            if(selectedText.matches(questionArr[resId].getCapital()))
+                            {
+                                questionAnswers[resId] = 1;//if its correct the index of this question is set to 1
+                            }
+                            else
+                            {
+                                questionAnswers[resId] = 0;//if its wrong then set to 0
+                            }
+                            if(resId==4){
+                                Intent reg = new
+                                        Intent(getActivity(), results.class);
+                                startActivity(reg);
+                            }
+
+
+                        } else {
+
+                        }
+                    }
+                });
 
             }
         }

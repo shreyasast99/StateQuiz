@@ -21,7 +21,7 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     private static final String DEBUG_TAG = "StateQuizDBHelper";
 
     private static final String DB_NAME = "statequizquestions.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
 
     // Define all names (strings) for table and column names.
     // This will be useful if we want to change these names later.
