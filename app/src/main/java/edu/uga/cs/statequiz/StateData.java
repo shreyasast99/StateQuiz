@@ -4,7 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +32,11 @@ public class StateData {
             //StateQuizDBHelper.STATEQUIZ_COLUMN_STATEHOOD,
             //StateQuizDBHelper.STATEQUIZ_COLUMN_CAPITALSINCE,
             //StateQuizDBHelper.STATEQUIZ_COLUMN_SIZERANK
+    };
+    private static final String[] allQuizColumns = {
+            StateQuizDBHelper.PASTSCORES_COLUMNID,
+            StateQuizDBHelper.PASTSCORES_COLUMN_DATE,
+            StateQuizDBHelper.PASTSCORES_COLUMN_SCORE
     };
 
     public StateData( Context context ) {
@@ -125,6 +134,67 @@ public class StateData {
         Log.d( DEBUG_TAG, "Stored new job lead with id: " + String.valueOf( jobLead.getId() ) );
 
         return jobLead;
+    }
+
+    // Retrieve all job leads and return them as a List.
+    // This is how we restore persistent objects stored as rows in the job leads table in the database.
+    // For each retrieved row, we create a new JobLead (Java POJO object) instance and add it to the list.
+    public List<Score> retrieveAllScores() {
+        ArrayList<Score> scoreList = new ArrayList<>();
+        Cursor cursor = null;
+
+
+        try {
+            // Execute the select query and get the Cursor to iterate over the retrieved rows
+            cursor = db.query( StateQuizDBHelper.TABLE_PASTSCORES, allQuizColumns, null, null, null, null, null);
+            Log.d( DEBUG_TAG, "Number of records from DB: " + cursor.getCount() );
+
+            // collect all job leads into a List
+            if( cursor.getCount() > 0 ) {
+                while( cursor.moveToNext() ) {
+                    // get all attribute values of this job lead
+                    long id = cursor.getLong( cursor.getColumnIndex( StateQuizDBHelper.PASTSCORES_COLUMNID ) );
+                    String date = cursor.getString( cursor.getColumnIndex( StateQuizDBHelper.PASTSCORES_COLUMN_DATE ) );
+                    int score = Integer.parseInt(cursor.getString( cursor.getColumnIndex( StateQuizDBHelper.PASTSCORES_COLUMN_SCORE ) ));
+
+                    // create a new JobLead object and set its state to the retrieved values
+                    Score scoreObject = new Score( date, score);
+                    scoreObject.setId( id ); // set the id (the primary key) of this object
+                    // add it to the list
+                    scoreList.add( scoreObject );
+                    //Log.d( DEBUG_TAG, "Retrieved JobLead: " + stateObj );
+                }
+            }
+            Log.d( DEBUG_TAG, "Number of records from DB: " + cursor.getCount() );
+        }
+        catch( Exception e ){
+            Log.d( DEBUG_TAG, "Exception caught: " + e );
+        }
+        finally{
+            // we should close the cursor
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        // return a list of retrieved job leads
+        return scoreList;
+    }
+
+    // storing quiz results into table
+    public Score storeQuiz(Score score){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        ContentValues values = new ContentValues();
+        values.put(StateQuizDBHelper.PASTSCORES_COLUMN_SCORE, score.getScore());
+        values.put(StateQuizDBHelper.PASTSCORES_COLUMN_DATE,formatter.format(date));
+
+        long id = db.insert(StateQuizDBHelper.TABLE_PASTSCORES, null, values);
+        Log.d( DEBUG_TAG, "this the id bae2: " + id );
+        score.setId(id);
+        Log.d( DEBUG_TAG, "Stored new job lead with id: " + String.valueOf( score.getId() ) );
+
+        return score;
+
     }
 
 

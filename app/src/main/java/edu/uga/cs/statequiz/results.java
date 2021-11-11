@@ -24,6 +24,7 @@ public class results extends AppCompatActivity {
         // Calculate the quiz result and set it in the database
         // textView4.setText();
 
+
     }
     private class QuizButtonClickListener implements View.OnClickListener {
         @Override
