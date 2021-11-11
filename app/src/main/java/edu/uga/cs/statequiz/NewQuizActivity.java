@@ -21,6 +21,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This class is used for the quiz portion of this app.
+ * */
 public class NewQuizActivity extends AppCompatActivity {
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
@@ -30,6 +33,11 @@ public class NewQuizActivity extends AppCompatActivity {
     public static ArrayList<Integer> vals = new ArrayList<Integer>();
     public static int [] questionAnswers = new int[5];
     private StateData jobLeadsData = null;
+
+    /**
+     * @param savedInstanceState
+     * This method creates the stuff for the quiz.
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +64,18 @@ public class NewQuizActivity extends AppCompatActivity {
 
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            /**
+             * @param position
+             * @param positionOffset
+             * @param positionOffsetPixels
+             * */
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
+            /**
+             * @param position
+             * */
             @Override
             public void onPageSelected(int position) {
                 mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(position));
@@ -74,12 +90,21 @@ public class NewQuizActivity extends AppCompatActivity {
 
             }
 
+            /**
+             * @param state
+             * */
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
     }
     //THIS IS WHERE EVERYTHING IS HAPPENING
+    /**
+     * @param questions
+     * @param question
+     * @param radioGroup
+     * This method checks if the selected radio button is correct or not
+     * */
     public boolean checkAnswers(TextView questions, int question ,RadioGroup radioGroup) {
         if (radioGroup.getCheckedRadioButtonId() == -1)
         {
@@ -110,6 +135,12 @@ public class NewQuizActivity extends AppCompatActivity {
             return true;
         }
     }
+    /**
+     * @param questions
+     * @param question
+     * @param radioGroup
+     * This method loads the questions.
+     * */
     public void loadView(TextView questions, int question ,RadioGroup radioGroup) {
         //int random_int = (int)Math.floor(Math.random()*(49-1+1)+1);
         checkAnswers(questions,question ,radioGroup);
@@ -127,24 +158,46 @@ public class NewQuizActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This class swipes
+     * */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private final int mSize;
 
+        /**
+         * @param fm
+         * @param size
+         * This sets the size
+         * */
         public SectionsPagerAdapter(FragmentManager fm, int size) {
             super(fm);
             this.mSize = size;
         }
 
+        /**
+         * @param position
+         * @return Fragment
+         * This method gets the item for the fragment
+         * */
         @Override
         public Fragment getItem(int position) {
             return PlaceholderFragment.newInstance(position + 1);
         }
 
+        /**
+         * @return int
+         * This method gets the size
+         * */
         @Override
         public int getCount() {
             return mSize;
         }
 
+        /**
+         * @param position
+         * @return string
+         * This method gets the page title
+         * */
         @Override
         public CharSequence getPageTitle(int position) {
             int imageNum = position + 1;
@@ -152,6 +205,9 @@ public class NewQuizActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This class sets up the placeholder fragment
+     * */
     public static class PlaceholderFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private int mImageNum;
@@ -160,6 +216,10 @@ public class NewQuizActivity extends AppCompatActivity {
         private TextView actualQuestion;
 
 
+        /**
+         * @param sectionNumber
+         * This method sets up a new placeholder fragment
+         * */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -168,9 +228,16 @@ public class NewQuizActivity extends AppCompatActivity {
             return fragment;
         }
 
+        /**
+         * Default placeholder fragment
+         * */
         public PlaceholderFragment() {
         }
 
+        /**
+         * @param savedInstanceState
+         * This creates the placeholder fragment when called
+         * */
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -181,6 +248,12 @@ public class NewQuizActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * @param inflater
+         * @param container
+         * @param savedInstanceState
+         * @return View
+         * */
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -192,6 +265,8 @@ public class NewQuizActivity extends AppCompatActivity {
             return rootView;
         }
 
+        /**
+         * @param savedInstanceState */
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
@@ -201,6 +276,10 @@ public class NewQuizActivity extends AppCompatActivity {
 
                 ((NewQuizActivity) getActivity()).loadView(actualQuestion,resId,radioGroup);
                 radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    /**
+                     * @param checkedId
+                     * @param group
+                     * */
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         if (checkedId!= -1) {
                             int radioButtonID = radioGroup.getCheckedRadioButtonId();

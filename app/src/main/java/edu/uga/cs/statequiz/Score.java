@@ -2,7 +2,7 @@ package edu.uga.cs.statequiz;
 
 
 /**
- * This class (a POJO) represents a single job lead, including the id, company name,
+ * This class (a POJO) represents a single score, including the id, company name,
  * phone number, URL, and some comments.
  * The id is -1 if the object has not been persisted in the database yet, and
  * the db table's primary key value, if it has been persisted.

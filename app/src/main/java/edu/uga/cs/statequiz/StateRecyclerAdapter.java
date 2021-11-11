@@ -19,6 +19,7 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
     private List<Score> scoreList;
     private StateData score = null;
 
+    /**@param scoreList*/
     public StateRecyclerAdapter( List<Score> scoreList ) {
         this.scoreList = scoreList;
     }
@@ -31,6 +32,7 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
         TextView secondcity;
         TextView thirdcity;
 
+        /**@param itemView*/
         public JobLeadHolder(View itemView ) {
             super(itemView);
 
@@ -42,6 +44,8 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
         }
     }
 
+    /**@param viewType
+     * @param parent */
     @Override
     public JobLeadHolder onCreateViewHolder( ViewGroup parent, int viewType ) {
         // We need to make sure that all CardViews have the same, full width, allowed by the parent view.
@@ -56,6 +60,8 @@ public class StateRecyclerAdapter extends RecyclerView.Adapter<StateRecyclerAdap
 
     // This method fills in the values of a holder to show a JobLead.
     // The position parameter indicates the position on the list of jobs list.
+    /**@param holder
+     * @param position */
     @Override
     public void onBindViewHolder( JobLeadHolder holder, int position ) {
         Score score = scoreList.get( position );

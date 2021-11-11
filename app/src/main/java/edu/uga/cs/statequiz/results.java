@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This activity shows the score that you receive once you answer all the questions.
+ * */
 public class results extends AppCompatActivity {
     private TextView textView4;
     private Button button;
@@ -23,6 +26,10 @@ public class results extends AppCompatActivity {
     private StateData scores = null;
     private Score quiz = null;
 
+
+    /**
+     * oncreate to display the results page
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +54,18 @@ public class results extends AppCompatActivity {
         textView4.setText(Integer.toString(count));
 
     }
+    /**
+     * This class writes into the database your score.
+     * */
     public class ScoreDBWriter extends AsyncTask<Score, Score> {
 
         // This method will run as a background process to write into db.
         // It will be automatically invoked by Android, when we call the execute method
         // in the onClick listener of the Save button.
+        /**
+         * @param jobLeads
+         * This method stores the quiz result in the database.
+         * */
         @Override
         protected Score doInBackground( Score... jobLeads ) {
             scores.storeQuiz( jobLeads[0] );
@@ -62,6 +76,10 @@ public class results extends AppCompatActivity {
         // in a background process has finished.  Note that doInBackground returns a JobLead object.
         // That object will be passed as argument to onPostExecute.
         // onPostExecute is like the notify method in an asynchronous method call discussed in class.
+        /**
+         * @param jobLead
+         * This method makes a toast.
+         * */
         @Override
         protected void onPostExecute( Score jobLead ) {
             // Show a quick confirmation message
@@ -73,7 +91,14 @@ public class results extends AppCompatActivity {
             Log.d( DEBUG_TAG, "Job lead saved: " + jobLead );
         }
     }
+
+    /**
+     * This class implements the different activities that are created based on the button you click.
+     * */
     private class QuizButtonClickListener implements View.OnClickListener {
+        /**
+         * @param view
+         * */
         @Override
         public void onClick(View view) {
             Intent intent = null;

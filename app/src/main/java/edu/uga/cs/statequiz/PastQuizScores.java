@@ -11,12 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * This class displays the past quiz scores
+ * */
 public class PastQuizScores extends AppCompatActivity {
     private RecyclerView recyclerView;
     private StateRecyclerAdapter recyclerAdapter;
 
     private StateData statesData = null;
     private List<Score> scoreList;
+
+    /**
+     * @param savedInstanceState
+     * @return
+     * This method creates the list of past quiz scores.
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +48,18 @@ public class PastQuizScores extends AppCompatActivity {
     }
 
     // This is an AsyncTask class (it extends AsyncTask) to perform DB reading of job leads, asynchronously.
+    /**
+     * This class helps with the database
+     * */
     private class StateQuizDBHelper extends AsyncTask<Void, List<Score>> {
         // This method will run as a background process to read from db.
         // It returns a list of retrieved JobLead objects.
         // It will be automatically invoked by Android, when we call the execute method
         // in the onCreate callback (the job leads review activity is started).
+        /**
+         * @param params
+         * This method runs in the background to read data and score objects.
+         * */
         @Override
         protected List<Score> doInBackground( Void... params ) {
             statesData.open();
@@ -58,6 +74,10 @@ public class PastQuizScores extends AppCompatActivity {
         // background process is finished.  It will then create and set an adapter to provide
         // values for the RecyclerView.
         // onPostExecute is like the notify method in an asynchronous method call discussed in class.
+        /**
+         * @param jobLeadsList
+         * This method will create and set the adapter to provide the information needed for the Recycler View/
+         * */
         @Override
         protected void onPostExecute( List<Score> jobLeadsList ) {
             recyclerAdapter = new StateRecyclerAdapter( jobLeadsList );

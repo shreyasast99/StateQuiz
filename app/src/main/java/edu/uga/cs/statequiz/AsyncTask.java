@@ -35,6 +35,9 @@ public abstract class AsyncTask<Param,Result> {
         // Since the Runnable below will execute in a different thread, the main UI thread
         // will not be blocked.
         executor.execute( new Runnable() {
+            /**
+             * This runs the async program
+             * */
             @Override
             public void run() {
 
@@ -55,9 +58,12 @@ public abstract class AsyncTask<Param,Result> {
                 // Post the processing of the result of the doInBackground method
                 // on the main UI thread's looper.
                 handler.post( new Runnable() {
+                    /**
+                     * This executes the method result in the main thread
+                     * */
                     @Override
                     public void run() {
-                        // handle the method result in the main UI threa
+                        // handle the method result in the main UI thread
                         onPostExecute( result );
                     }
                 });

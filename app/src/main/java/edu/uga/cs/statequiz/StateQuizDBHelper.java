@@ -86,6 +86,7 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
 
     // We must override onCreate method, which will be used to create the database if
     // it does not exist yet.
+    /**@param db */
     @Override
     public void onCreate( SQLiteDatabase db ) {
         db.execSQL( CREATE_STATEQUIZ );
@@ -99,6 +100,9 @@ public class StateQuizDBHelper extends SQLiteOpenHelper {
     // We should override onUpgrade method, which will be used to upgrade the database if
     // its version (DB_VERSION) has changed.  This will be done automatically by Android
     // if the version will be bumped up, as we modify the database schema.
+    /**@param db
+     * @param newVersion
+     * @param oldVersion */
     @Override
     public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
         db.execSQL( "drop table if exists " + TABLE_STATEQUIZ );

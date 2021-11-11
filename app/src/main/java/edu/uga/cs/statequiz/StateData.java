@@ -35,27 +35,30 @@ public class StateData {
             StateQuizDBHelper.PASTSCORES_COLUMN_SCORE
     };
 
+    /**
+     * @param context*/
     public StateData( Context context ) {
         this.stateQuizDbHelper = StateQuizDBHelper.getInstance( context );
     }
 
-    // Open the database
+    /**Opens the database*/
     public void open() {
         db = stateQuizDbHelper.getWritableDatabase();
         Log.d( DEBUG_TAG, "JobLeadsData: db open" );
     }
 
-    // Close the database
+    /**Close the database*/
     public void close() {
         if( stateQuizDbHelper != null ) {
             stateQuizDbHelper.close();
             Log.d(DEBUG_TAG, "JobLeadsData: db closed");
         }
     }
-
-    // Retrieve all job leads and return them as a List.
     // This is how we restore persistent objects stored as rows in the job leads table in the database.
     // For each retrieved row, we create a new JobLead (Java POJO object) instance and add it to the list.
+    /**
+     * This method retrieves all job leads and returns them as a List.
+     * */
     public List<State> retrieveAllJobLeads() {
         ArrayList<State> stateList = new ArrayList<>();
         Cursor cursor = null;
@@ -103,6 +106,7 @@ public class StateData {
     }
     //WE NEED TO CHANGE THIS FOR THE QUIZ INFO
     // Store a new job lead in the database
+    /**@param jobLead*/
     public State storeJobLead( State jobLead ) {
 
         // Prepare the values for all of the necessary columns in the table
@@ -177,6 +181,7 @@ public class StateData {
     }
 
     // storing quiz results into table
+    /**@param score*/
     public Score storeQuiz(Score score){
         ContentValues values = new ContentValues();
         values.put(StateQuizDBHelper.PASTSCORES_COLUMN_SCORE, score.getScore());
